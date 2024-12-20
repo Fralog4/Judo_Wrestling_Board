@@ -20,6 +20,7 @@ target/
 *.iml
 *.ipr
 db.properties
+*.sql
 
 ### NetBeans ###
 /nbproject/private/

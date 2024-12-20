@@ -2,6 +2,7 @@ package com.judo_wrestling_board.view;
 
 import com.judo_wrestling_board.model.JudoScore;
 import com.judo_wrestling_board.service.AthleteService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
@@ -85,7 +86,14 @@ public class JudoView extends Div {
         athleteTwo.add(scoreTwo);
 
 
-        add(athleteOne, athleteTwo, buttonScoreLayout);
+        Button goBackToHome = new Button("Back to Home");
+        goBackToHome.setClassName("back-button");
+        goBackToHome.addClickListener(e -> {
+            UI.getCurrent().navigate("/home");
+        });
+
+
+        add(athleteOne, athleteTwo, buttonScoreLayout,goBackToHome);
     }
 
     private void addScore(Button button) {
