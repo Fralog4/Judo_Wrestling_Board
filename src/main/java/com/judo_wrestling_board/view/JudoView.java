@@ -27,8 +27,8 @@ public class JudoView extends Div {
 
         addClassName("judo-view");
 
-        HorizontalLayout buttonScoreLayout = new HorizontalLayout();
-        buttonScoreLayout.addClassName("button-score-layout");
+//        HorizontalLayout buttonScoreLayout = new HorizontalLayout();
+//        buttonScoreLayout.addClassName("button-score-layout");
 
         Button ipponButton = new Button("Ippon");
         ipponButton.addClickListener(event -> addScore(ipponButton));
@@ -39,7 +39,22 @@ public class JudoView extends Div {
         Button yukoButton = new Button("Yuko");
         yukoButton.addClickListener(event -> addScore(yukoButton));
         yukoButton.setClassName("yuko-button");
-        buttonScoreLayout.add(ipponButton, wazaAriButton, yukoButton);
+
+
+
+        Button ipponButtonTwo = new Button("Ippon");
+        ipponButtonTwo.addClickListener(event -> addScore(ipponButton));
+        ipponButtonTwo.setClassName("ipponButton-button");
+        Button wazaAriButtonTwo = new Button("Waza-Ari");
+        wazaAriButtonTwo.addClickListener(event -> addScore(wazaAriButton));
+        wazaAriButtonTwo.setClassName("wazaAri-button");
+        Button yukoButtonTwo = new Button("Yuko");
+        yukoButtonTwo.addClickListener(event -> addScore(yukoButton));
+        yukoButtonTwo.setClassName("yuko-button");
+
+
+
+//        buttonScoreLayout.add(ipponButton, wazaAriButton, yukoButton);
 
 
         HorizontalLayout athleteOne = new HorizontalLayout();
@@ -82,8 +97,8 @@ public class JudoView extends Div {
         scoreTwo.setStepButtonsVisible(true);
         scoreTwo.setClearButtonVisible(true);
 
-        athleteOne.add(score);
-        athleteTwo.add(scoreTwo);
+        athleteOne.add(score,ipponButton, wazaAriButton, yukoButton);
+        athleteTwo.add(scoreTwo,ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
 
 
         Button goBackToHome = new Button("Back to Home");
@@ -93,7 +108,7 @@ public class JudoView extends Div {
         });
 
 
-        add(athleteOne, athleteTwo, buttonScoreLayout,goBackToHome);
+        add(athleteOne, athleteTwo,goBackToHome);
     }
 
     private void addScore(Button button) {
