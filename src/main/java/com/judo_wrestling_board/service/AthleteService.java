@@ -33,6 +33,8 @@ public class AthleteService {
         athleteRepository.save(athlete);
     }
 
-    public List<Athlete> getAllAthletes() {return athleteRepository.findAll();}
+    public List<String> getAllAthletes() {return athleteRepository.findAll()
+            .stream()
+            .map(athlete -> athlete.getName()+" "+athlete.getSurname()).toList();}
 
 }

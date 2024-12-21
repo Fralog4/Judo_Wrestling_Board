@@ -12,10 +12,6 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.router.Route;
 
-/***
- *
- * ricordati di far diventare persistene h2 c'è il modo oppure inietta sql, poi nella select appaere il json modifica che è brutto da vedere
- */
 
 @Route("judoView")
 public class JudoView extends Div {
