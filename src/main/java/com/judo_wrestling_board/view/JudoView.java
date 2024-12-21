@@ -7,10 +7,9 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 /***
@@ -37,48 +36,6 @@ public class JudoView extends Div {
         athleteTwo.setSpacing(true);
         athleteTwo.setClassName("athlete-two");
 
-        Button ipponButton = new Button("Ippon");
-        ipponButton.addClickListener(event -> addScore(ipponButton,athleteOne));
-        ipponButton.setClassName("ipponButton-button");
-        Button wazaAriButton = new Button("Waza-Ari");
-        wazaAriButton.addClickListener(event -> addScore(wazaAriButton,athleteOne));
-        wazaAriButton.setClassName("wazaAri-button");
-        Button yukoButton = new Button("Yuko");
-        yukoButton.addClickListener(event -> addScore(yukoButton,athleteOne));
-        yukoButton.setClassName("yuko-button");
-
-
-
-        Button ipponButtonTwo = new Button("Ippon");
-        ipponButtonTwo.addClickListener(event -> addScore(ipponButton,athleteTwo));
-        ipponButtonTwo.setClassName("ipponButton-button");
-        Button wazaAriButtonTwo = new Button("Waza-Ari");
-        wazaAriButtonTwo.addClickListener(event -> addScore(wazaAriButton,athleteTwo));
-        wazaAriButtonTwo.setClassName("wazaAri-button");
-        Button yukoButtonTwo = new Button("Yuko");
-        yukoButtonTwo.addClickListener(event -> addScore(yukoButton,athleteTwo));
-        yukoButtonTwo.setClassName("yuko-button");
-
-
-
-//        buttonScoreLayout.add(ipponButton, wazaAriButton, yukoButton);
-
-
-
-        Select athleteOneChoose = new Select<>();
-        athleteOneChoose.setItems(athleteService.getAllAthletes());
-        athleteOneChoose.setLabel("Atleta 1");
-        athleteOneChoose.setPlaceholder("Seleziona un atleta");
-        athleteOneChoose.setClassName("athlete-one-choose");
-        athleteOne.add(athleteOneChoose);
-
-        Select athleteTwoChoose = new Select<>();
-        athleteTwoChoose.setItems(athleteService.getAllAthletes());
-        athleteTwoChoose.setLabel("Atleta 2");
-        athleteTwoChoose.setPlaceholder("Seleziona un atleta");
-        athleteTwoChoose.setClassName("athlete-two-choose");
-        athleteTwo.add(athleteTwoChoose);
-
 
         IntegerField score = new IntegerField();
         score.setLabel("Punteggio");
@@ -97,6 +54,61 @@ public class JudoView extends Div {
         scoreTwo.setStepButtonsVisible(true);
         scoreTwo.setClearButtonVisible(true);
 
+        Button ipponButton = new Button("Ippon");
+        ipponButton.addClickListener(event -> addScore(ipponButton,athleteOne,score));
+        ipponButton.setClassName("ipponButton-button");
+
+        Button wazaAriButton = new Button("Waza-Ari");
+        wazaAriButton.addClickListener(event -> addScore(wazaAriButton,athleteOne,score));
+        wazaAriButton.setClassName("wazaAri-button");
+
+        Button yukoButton = new Button("Yuko");
+        yukoButton.addClickListener(event -> addScore(yukoButton,athleteOne,score));
+        yukoButton.setClassName("yuko-button");
+
+
+
+        Button ipponButtonTwo = new Button("Ippon");
+        ipponButtonTwo.addClickListener(event -> addScore(ipponButton,athleteTwo,scoreTwo));
+        ipponButtonTwo.setClassName("ipponButton-button");
+
+        Button wazaAriButtonTwo = new Button("Waza-Ari");
+        wazaAriButtonTwo.addClickListener(event -> addScore(wazaAriButton,athleteTwo,scoreTwo));
+        wazaAriButtonTwo.setClassName("wazaAri-button");
+
+        Button yukoButtonTwo = new Button("Yuko");
+        yukoButtonTwo.addClickListener(event -> addScore(yukoButton,athleteTwo,scoreTwo));
+        yukoButtonTwo.setClassName("yuko-button");
+
+
+        VerticalLayout athleteOneButtonsAndScore = new VerticalLayout(ipponButton, wazaAriButton, yukoButton);
+        athleteOneButtonsAndScore.setSpacing(false);
+        athleteOneButtonsAndScore.setPadding(false);
+        athleteOne.add(athleteOneButtonsAndScore);
+
+        VerticalLayout athleteTwoButtonsAndScore = new VerticalLayout(ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
+        athleteTwoButtonsAndScore.setSpacing(false);
+        athleteTwoButtonsAndScore.setPadding(false);
+        athleteTwo.add(athleteOneButtonsAndScore);
+
+
+
+        Select athleteOneChoose = new Select<>();
+        athleteOneChoose.setItems(athleteService.getAllAthletes());
+        athleteOneChoose.setLabel("Atleta 1");
+        athleteOneChoose.setPlaceholder("Seleziona un atleta");
+        athleteOneChoose.setClassName("athlete-one-choose");
+        athleteOne.add(athleteOneChoose);
+
+        Select athleteTwoChoose = new Select<>();
+        athleteTwoChoose.setItems(athleteService.getAllAthletes());
+        athleteTwoChoose.setLabel("Atleta 2");
+        athleteTwoChoose.setPlaceholder("Seleziona un atleta");
+        athleteTwoChoose.setClassName("athlete-two-choose");
+        athleteTwo.add(athleteTwoChoose);
+
+
+
         athleteOne.add(score,ipponButton, wazaAriButton, yukoButton);
         athleteTwo.add(scoreTwo,ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
 
@@ -111,28 +123,43 @@ public class JudoView extends Div {
         add(athleteOne, athleteTwo,goBackToHome);
     }
 
-    private void addScore(Button button, HorizontalLayout playerHorizontal) {
-        Span scoreDisplay = (Span) playerHorizontal.getChildren()
+    private void addScore(Button button, HorizontalLayout playerHorizontal,IntegerField scoreLayout) {
+        VerticalLayout buttonAndScoreLayout = (VerticalLayout) playerHorizontal.getChildren()
+                .filter(component -> component.getClass().equals(VerticalLayout.class))
+                .findFirst()
+                .orElseGet(() -> {
+                    VerticalLayout newLayout = new VerticalLayout();
+                    newLayout.setSpacing(false);
+                    newLayout.setPadding(false);
+                    playerHorizontal.add(newLayout);
+                    return newLayout;
+                });
+
+        Span scoreDisplay = (Span) buttonAndScoreLayout.getChildren()
                 .filter(component -> component.getClass().equals(Span.class))
                 .findFirst()
                 .orElseGet(() -> {
                     Span newScoreDisplay = new Span();
                     newScoreDisplay.setClassName("score-display");
-                    playerHorizontal.addComponentAtIndex(0, newScoreDisplay);
+                    buttonAndScoreLayout.add(newScoreDisplay);
                     return newScoreDisplay;
                 });
 
-        JudoScore score = getScoreFromButton(button.getText());
+        JudoScore score = getScoreFromButton(button.getText(),scoreLayout);
         scoreDisplay.setText(score.toString().toUpperCase());
     }
 
-    private JudoScore getScoreFromButton(String buttonText) {
+
+    private JudoScore getScoreFromButton(String buttonText, IntegerField scoreLayout) {
         switch (buttonText) {
             case "Ippon":
+                scoreLayout.setValue(10);
                 return JudoScore.IPPON;
             case "Waza-Ari":
+                scoreLayout.setValue(1);
                 return JudoScore.WAZARI;
             case "Yuko":
+                scoreLayout.setValue(1);
                 return JudoScore.YUKO;
             default:
                 throw new IllegalArgumentException("Unknown button text: " + buttonText);
