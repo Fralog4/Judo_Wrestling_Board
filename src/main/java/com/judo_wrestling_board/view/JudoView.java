@@ -66,8 +66,6 @@ public class JudoView extends Div {
         yukoButton.addClickListener(event -> addScore(yukoButton,athleteOne,score));
         yukoButton.setClassName("yuko-button");
 
-
-
         Button ipponButtonTwo = new Button("Ippon");
         ipponButtonTwo.addClickListener(event -> addScore(ipponButton,athleteTwo,scoreTwo));
         ipponButtonTwo.setClassName("ipponButton-button");
@@ -81,36 +79,22 @@ public class JudoView extends Div {
         yukoButtonTwo.setClassName("yuko-button");
 
 
-        VerticalLayout athleteOneButtonsAndScore = new VerticalLayout(ipponButton, wazaAriButton, yukoButton);
-        athleteOneButtonsAndScore.setSpacing(false);
-        athleteOneButtonsAndScore.setPadding(false);
-        athleteOne.add(athleteOneButtonsAndScore);
-
-        VerticalLayout athleteTwoButtonsAndScore = new VerticalLayout(ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
-        athleteTwoButtonsAndScore.setSpacing(false);
-        athleteTwoButtonsAndScore.setPadding(false);
-        athleteTwo.add(athleteOneButtonsAndScore);
-
-
-
         Select athleteOneChoose = new Select<>();
         athleteOneChoose.setItems(athleteService.getAllAthletes());
         athleteOneChoose.setLabel("Atleta 1");
         athleteOneChoose.setPlaceholder("Seleziona un atleta");
         athleteOneChoose.setClassName("athlete-one-choose");
-        athleteOne.add(athleteOneChoose);
 
         Select athleteTwoChoose = new Select<>();
         athleteTwoChoose.setItems(athleteService.getAllAthletes());
         athleteTwoChoose.setLabel("Atleta 2");
         athleteTwoChoose.setPlaceholder("Seleziona un atleta");
         athleteTwoChoose.setClassName("athlete-two-choose");
-        athleteTwo.add(athleteTwoChoose);
 
 
 
-        athleteOne.add(score,ipponButton, wazaAriButton, yukoButton);
-        athleteTwo.add(scoreTwo,ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
+        athleteOne.add(athleteOneChoose,score,ipponButton, wazaAriButton, yukoButton);
+        athleteTwo.add(athleteTwoChoose,scoreTwo,ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
 
 
         Button goBackToHome = new Button("Back to Home");
