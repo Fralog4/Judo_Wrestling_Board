@@ -46,7 +46,6 @@ public class JudoView extends Div {
         score.setMin(0);
         score.setMax(2);
         score.setStepButtonsVisible(true);
-        score.setClearButtonVisible(true);
         score.setValue(0);
 
 
@@ -56,7 +55,6 @@ public class JudoView extends Div {
         scoreTwo.setMin(0);
         scoreTwo.setMax(2);
         scoreTwo.setStepButtonsVisible(true);
-        scoreTwo.setClearButtonVisible(true);
         scoreTwo.setValue(0);
 
         Button shidoButton = new Button("Shido");
@@ -131,7 +129,7 @@ public class JudoView extends Div {
 
     private void addAmmonition(Button button,HorizontalLayout playerHorizontal) {
 
-        Span newAmmoDisplay = new Span(createIcon(VaadinIcon.HAND));
+        Span newAmmoDisplay = new Span();
         newAmmoDisplay.getElement().setAttribute("theme", "badge error");
         newAmmoDisplay.setClassName("ammo-display");
         playerHorizontal.add(newAmmoDisplay);
@@ -154,7 +152,7 @@ public class JudoView extends Div {
 
     private void addScore(Button button, HorizontalLayout playerHorizontal,IntegerField scoreLayout) {
 
-        Span scoreDisplay = new Span(createIcon(VaadinIcon.POINTER));
+        Span scoreDisplay = new Span();
         scoreDisplay.setClassName("score-display");
         playerHorizontal.add(scoreDisplay);
         JudoScore score = getScoreFromButton(button.getText(),scoreLayout);
@@ -175,7 +173,10 @@ public class JudoView extends Div {
                 if (scoreLayout.getValue() < 3) {
                     scoreLayout.setValue(scoreLayout.getValue() + 1);
                     return JudoScore.WAZARI;
-                } else {
+                } else if(scoreLayout.getValue() == 3) {
+                    return JudoScore.IPPON;
+                }
+                else {
                     return JudoScore.NOPOINT;
                 }
             case "Yuko":
