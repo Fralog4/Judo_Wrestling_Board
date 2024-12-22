@@ -88,7 +88,6 @@ public class JudoView extends Div {
         athleteTwoChoose.setClassName("athlete-two-choose");
 
 
-
         athleteOne.add(athleteOneChoose,score,ipponButton, wazaAriButton, yukoButton);
         athleteTwo.add(athleteTwoChoose,scoreTwo,ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
 

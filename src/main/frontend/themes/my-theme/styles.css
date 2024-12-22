@@ -80,9 +80,16 @@
     font-size: 30px;
     background-color: white;
 }
+.athlete-one-choose::part(input-field){
+    background-color: hsl(241 48% 58% / 1);
+}
+
 .athlete-two-choose{
     font-size: 30px;
     background-color: blue;
+}
+.athlete-two-choose::part(input-field){
+    background-color: white;
 }
 .athlete-one{
     background-color: white;
@@ -171,6 +178,9 @@
 }
 
 .score-integer-two::part(increase-button){
+    color: white;
+}
+.score-integer-two::part(clear-button){
     color: white;
 }
 .score-display{
