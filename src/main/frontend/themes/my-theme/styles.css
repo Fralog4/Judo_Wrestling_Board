@@ -22,7 +22,7 @@
     background-color: rgb(0, 0, 0);
     opacity:0.5;
     padding: 60px 80px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     margin: 0;
     position: absolute;
@@ -36,7 +36,7 @@
     background-color: rgb(0, 0, 0);
     opacity:0.5;
     padding: 60px 60px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     margin: 0;
     position: absolute;
@@ -46,11 +46,11 @@
     transform: translate(-50%, -50%);
 }
 .register-athlete-button{
-    color:blue;
+    color:white;
     background-color: rgb(0, 0, 0);
     opacity:0.7;
     padding: 30px 30px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     margin: 0;
     position: absolute;
@@ -62,8 +62,7 @@
 }
 .back-button{
     color:orange;
-    background-color: white;
-    opacity:0.7;
+    background-color: black;
     padding: 30px 30px;
     font-size: 16px;
     cursor: pointer;
@@ -95,6 +94,7 @@
     background-color: white;
     height: 40vh;
     opacity:0.5;
+
 }
 .athlete-two{
     background-color: blue;
@@ -125,25 +125,24 @@
     color:white;
     cursor: pointer;
     background-color: orange;
-    font-size: 25px;
-    margin: 10px;
+    font-size: 20px;
 }
 .wazaAri-button{
     color:white;
     cursor: pointer;
     background-color: orange;
-    font-size: 25px;
-    margin: 10px;
+    font-size: 20px;
 }
 
 .yuko-button{
     color:white;
     cursor: pointer;
     background-color: orange;
-    font-size: 25px;
-    margin: 10px;
+    font-size: 20px;
 
 }
+
+
 .score-integer{
     color:black;
     background-color: white;
@@ -185,5 +184,24 @@
 }
 .score-display{
     color:black;
-    font-size: 35px;
+    font-size: 25px;
 }
+.register-view{
+    background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("img/registerViewImg.jpg");
+    background-position: center;
+    height: 100vh;
+}
+.ammo-display{
+
+    padding: 10px 20px;
+    font-size: 30px;
+    border-radius: 10px;
+    display: inline-block;
+
+
+
+
+}
+
+
+

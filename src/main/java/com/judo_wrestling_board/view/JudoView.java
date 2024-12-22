@@ -1,11 +1,14 @@
 package com.judo_wrestling_board.view;
 
+import com.judo_wrestling_board.model.JudoAmmonitions;
 import com.judo_wrestling_board.model.JudoScore;
 import com.judo_wrestling_board.service.AthleteService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -27,10 +30,14 @@ public class JudoView extends Div {
         HorizontalLayout athleteOne = new HorizontalLayout();
         athleteOne.setSpacing(true);
         athleteOne.setClassName("athlete-one");
+        athleteOne.setWrap(true);
 
         HorizontalLayout athleteTwo = new HorizontalLayout();
         athleteTwo.setSpacing(true);
         athleteTwo.setClassName("athlete-two");
+        athleteTwo.setWrap(true);
+
+
 
 
         IntegerField score = new IntegerField();
@@ -40,6 +47,7 @@ public class JudoView extends Div {
         score.setMax(2);
         score.setStepButtonsVisible(true);
         score.setClearButtonVisible(true);
+        score.setValue(0);
 
 
         IntegerField scoreTwo = new IntegerField();
@@ -49,6 +57,25 @@ public class JudoView extends Div {
         scoreTwo.setMax(2);
         scoreTwo.setStepButtonsVisible(true);
         scoreTwo.setClearButtonVisible(true);
+        scoreTwo.setValue(0);
+
+        Button shidoButton = new Button("Shido");
+        shidoButton.addClickListener(event -> addAmmonition(shidoButton,athleteOne));
+        shidoButton.setClassName("shido-button");
+
+        Button hansokuMakeButton = new Button("Hansoku Make");
+        hansokuMakeButton.addClickListener(event -> addAmmonition(hansokuMakeButton,athleteOne));
+        hansokuMakeButton.setClassName("hansokuMake-button");
+
+
+        Button shidoButtonTwo = new Button("Shido");
+        shidoButtonTwo.addClickListener(event -> addAmmonition(shidoButtonTwo,athleteTwo));
+        shidoButtonTwo.setClassName("shido-button-two");
+
+        Button hansokuMakeButtonTwo = new Button("Hansoku Make");
+        hansokuMakeButtonTwo.addClickListener(event -> addAmmonition(hansokuMakeButtonTwo,athleteTwo));
+        hansokuMakeButtonTwo.setClassName("hansokuMake-button-two");
+
 
         Button ipponButton = new Button("Ippon");
         ipponButton.addClickListener(event -> addScore(ipponButton,athleteOne,score));
@@ -88,8 +115,8 @@ public class JudoView extends Div {
         athleteTwoChoose.setClassName("athlete-two-choose");
 
 
-        athleteOne.add(athleteOneChoose,score,ipponButton, wazaAriButton, yukoButton);
-        athleteTwo.add(athleteTwoChoose,scoreTwo,ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo);
+        athleteOne.add(athleteOneChoose,score,ipponButton, wazaAriButton, yukoButton,shidoButton,hansokuMakeButton);
+        athleteTwo.add(athleteTwoChoose,scoreTwo,ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo,shidoButtonTwo,hansokuMakeButtonTwo);
 
 
         Button goBackToHome = new Button("Back to Home");
@@ -102,28 +129,34 @@ public class JudoView extends Div {
         add(athleteOne, athleteTwo,goBackToHome);
     }
 
+    private void addAmmonition(Button button,HorizontalLayout playerHorizontal) {
+
+        Span newAmmoDisplay = new Span(createIcon(VaadinIcon.HAND));
+        newAmmoDisplay.getElement().setAttribute("theme", "badge error");
+        newAmmoDisplay.setClassName("ammo-display");
+        playerHorizontal.add(newAmmoDisplay);
+
+        JudoAmmonitions ammo = getAmmonitionFromButton(button.getText());
+
+        newAmmoDisplay.setText(ammo.toString().toUpperCase());
+
+    }
+
+    private JudoAmmonitions getAmmonitionFromButton(String text) {
+        switch (text) {
+            case "Shido":
+                return JudoAmmonitions.SHIDO;
+            case "Hansoku Make":
+                return JudoAmmonitions.HANSOKU_MAKE;
+        }
+        return null;
+    }
+
     private void addScore(Button button, HorizontalLayout playerHorizontal,IntegerField scoreLayout) {
-        VerticalLayout buttonAndScoreLayout = (VerticalLayout) playerHorizontal.getChildren()
-                .filter(component -> component.getClass().equals(VerticalLayout.class))
-                .findFirst()
-                .orElseGet(() -> {
-                    VerticalLayout newLayout = new VerticalLayout();
-                    newLayout.setSpacing(false);
-                    newLayout.setPadding(false);
-                    playerHorizontal.add(newLayout);
-                    return newLayout;
-                });
 
-        Span scoreDisplay = (Span) buttonAndScoreLayout.getChildren()
-                .filter(component -> component.getClass().equals(Span.class))
-                .findFirst()
-                .orElseGet(() -> {
-                    Span newScoreDisplay = new Span();
-                    newScoreDisplay.setClassName("score-display");
-                    buttonAndScoreLayout.add(newScoreDisplay);
-                    return newScoreDisplay;
-                });
-
+        Span scoreDisplay = new Span(createIcon(VaadinIcon.POINTER));
+        scoreDisplay.setClassName("score-display");
+        playerHorizontal.add(scoreDisplay);
         JudoScore score = getScoreFromButton(button.getText(),scoreLayout);
         scoreDisplay.setText(score.toString().toUpperCase());
     }
@@ -132,16 +165,31 @@ public class JudoView extends Div {
     private JudoScore getScoreFromButton(String buttonText, IntegerField scoreLayout) {
         switch (buttonText) {
             case "Ippon":
-                scoreLayout.setValue(10);
-                return JudoScore.IPPON;
+                if(scoreLayout.getValue() < 10) {
+                    scoreLayout.setValue(10);
+                    return JudoScore.IPPON;
+                } else {
+                    return JudoScore.NOPOINT;
+                }
             case "Waza-Ari":
-                scoreLayout.setValue(1);
-                return JudoScore.WAZARI;
+                if (scoreLayout.getValue() < 3) {
+                    scoreLayout.setValue(scoreLayout.getValue() + 1);
+                    return JudoScore.WAZARI;
+                } else {
+                    return JudoScore.NOPOINT;
+                }
             case "Yuko":
-                scoreLayout.setValue(1);
+                scoreLayout.setValue(scoreLayout.getValue() + 1);
                 return JudoScore.YUKO;
             default:
                 throw new IllegalArgumentException("Unknown button text: " + buttonText);
         }
+    }
+
+
+    private Icon createIcon(VaadinIcon vaadinIcon) {
+        Icon icon = vaadinIcon.create();
+        icon.getStyle().set("padding", "var(--lumo-space-xs)");
+        return icon;
     }
 }

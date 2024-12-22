@@ -111,8 +111,11 @@ window.Vaadin.Flow.gridConnector.initLazy = (grid) => {
       selectedKeys = {};
     }
 
+    let selectedItemsChanged = false;
     items.forEach((item) => {
-      if (item) {
+      const selectable = !userOriginated || grid.isItemSelectable(item);
+      selectedItemsChanged = selectedItemsChanged || selectable;
+      if (item && selectable) {
         selectedKeys[item.key] = item;
         item.selected = true;
         if (userOriginated) {
@@ -128,7 +131,9 @@ window.Vaadin.Flow.gridConnector.initLazy = (grid) => {
       }
     });
 
-    grid.selectedItems = Object.values(selectedKeys);
+    if (selectedItemsChanged) {
+      grid.selectedItems = Object.values(selectedKeys);
+    }
   };
 
   grid.$connector.doDeselection = function (items, userOriginated) {
@@ -139,6 +144,10 @@ window.Vaadin.Flow.gridConnector.initLazy = (grid) => {
     const updatedSelectedItems = grid.selectedItems.slice();
     while (items.length) {
       const itemToDeselect = items.shift();
+      const selectable = !userOriginated || grid.isItemSelectable(itemToDeselect);
+      if (!selectable) {
+        continue;
+      }
       for (let i = 0; i < updatedSelectedItems.length; i++) {
         const selectedItem = updatedSelectedItems[i];
         if (itemToDeselect?.key === selectedItem.key) {
@@ -166,6 +175,11 @@ window.Vaadin.Flow.gridConnector.initLazy = (grid) => {
         if (grid.__deselectDisallowed) {
           grid.activeItem = oldVal;
         } else {
+          // The item instance may have changed since the item was stored as active item
+          // and information such as whether the item may be selected or deselected may
+          // be stale. Use data provider controller to get updated instance from grid
+          // cache.
+          oldVal = dataProviderController.getItemContext(oldVal).item;
           grid.$connector.doDeselection([oldVal], true);
         }
       }
@@ -455,7 +469,6 @@ window.Vaadin.Flow.gridConnector.initLazy = (grid) => {
       throw 'Attempted to call itemsUpdated with an invalid value: ' + JSON.stringify(items);
     }
     let detailsOpenedItems = Array.from(grid.detailsOpenedItems);
-    let updatedSelectedItem = false;
     for (let i = 0; i < items.length; ++i) {
       const item = items[i];
       if (!item) {
@@ -468,18 +481,8 @@ window.Vaadin.Flow.gridConnector.initLazy = (grid) => {
       } else if (grid._getItemIndexInArray(item, detailsOpenedItems) >= 0) {
         detailsOpenedItems.splice(grid._getItemIndexInArray(item, detailsOpenedItems), 1);
       }
-      if (selectedKeys[item.key]) {
-        selectedKeys[item.key] = item;
-        item.selected = true;
-        updatedSelectedItem = true;
-      }
     }
     grid.detailsOpenedItems = detailsOpenedItems;
-    if (updatedSelectedItem) {
-      // Replace the objects in the grid.selectedItems array without replacing the array
-      // itself in order to avoid an unnecessary re-render of the grid.
-      grid.selectedItems.splice(0, grid.selectedItems.length, ...Object.values(selectedKeys));
-    }
   };
 
   /**
@@ -1193,4 +1196,9 @@ window.Vaadin.Flow.gridConnector.initLazy = (grid) => {
       }
     }
   );
+
+  grid.isItemSelectable = (item) => {
+    // If there is no selectable data, assume the item is selectable
+    return item?.selectable === undefined || item.selectable;
+  };
 };
