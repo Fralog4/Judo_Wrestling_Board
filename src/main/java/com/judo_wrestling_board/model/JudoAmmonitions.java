@@ -7,5 +7,7 @@ public enum JudoAmmonitions {
     @Enumerated(EnumType.STRING)
     SHIDO,
     @Enumerated(EnumType.STRING)
-    HANSOKU_MAKE
+    HANSOKU_MAKE,
+    @Enumerated(EnumType.STRING)
+    NOAMMONITION
 }
