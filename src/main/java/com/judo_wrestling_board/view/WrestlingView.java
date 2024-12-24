@@ -18,8 +18,8 @@ import com.vaadin.flow.router.Route;
 public class WrestlingView extends Div {
 
     private final AthleteService athleteService;
-    private int counter = 0;
-
+    private int counterPlayerOne = 0;
+    private int counterPlayerTwo = 0;
 
     public WrestlingView(AthleteService athleteService) {
         this.athleteService = athleteService;
@@ -143,7 +143,9 @@ public class WrestlingView extends Div {
     }
 
     private void addAmmonition(Button button, HorizontalLayout playerHorizontal) {
-        counter++;
+        int counter = (playerHorizontal.getClassName().equals("player-one-horizontal"))
+                ? ++counterPlayerOne
+                : ++counterPlayerTwo;
 
         Image yellowCard = new Image();
         yellowCard.setSrc("img/yellow-card.jpg");
@@ -165,7 +167,12 @@ public class WrestlingView extends Div {
             redCard.setClassName("red-card");
             newAmmoDisplay.add(redCard);
             playerHorizontal.add(newAmmoDisplay);
-            counter = 0;
+
+            if (playerHorizontal.getClassName().equals("player-one-horizontal")) {
+                counterPlayerOne = 0;
+            } else {
+                counterPlayerTwo = 0;
+            }
         }
     }
 
