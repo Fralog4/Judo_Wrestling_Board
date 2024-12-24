@@ -240,12 +240,12 @@
 
 .player-one-horizontal{
     background-color: red;
-    height: 40vh;
+    height: 45vh;
     opacity:0.5;
 }
 .player-two-horizontal{
     background-color: blue;
-    height: 40vh;
+    height: 45vh;
     opacity:0.5;
 }
 .score-wrestler{
@@ -272,6 +272,7 @@
     color:white;
     font-size: 30px;
     display: inline-block;
+    margin-left: 10px;
 }
 
 .score-wrestler-two::part(input-field){
@@ -292,15 +293,15 @@
 
 .wrestler-one-choose{
 padding: 10px 20px;
-font-size: 30px;
-border-radius: 10px;
+font-size: 25px;
+border-radius: 5px;
 display: inline-block;
 }
 
 .wrestler-two-choose{
     padding: 10px 20px;
-    font-size: 30px;
-    border-radius: 10px;
+    font-size: 25px;
+    border-radius: 5px;
     display: inline-block;
 
 }
@@ -308,7 +309,7 @@ display: inline-block;
 
 .wrestler-one-choose::part(label){
     color: white;
-    font-size: 20px;
+    font-size: 15px;
 }
 .wrestler-one-choose::part(input-field){
     background-color: hsl(241 48% 58% / 1);
@@ -319,7 +320,7 @@ display: inline-block;
 }
 .wrestler-two-choose::part(label){
     color: white;
-    font-size: 20px;
+    font-size: 15px;
 }
 .wrestler-two-choose::part(input-field){
     background-color: hsl(241 48% 58% / 1);
@@ -331,24 +332,31 @@ display: inline-block;
     color: red;
     background-color: yellow;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
 }
 .four-points-button{
     background-color: white;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
 
 
 }
 .two-points-button{
     background-color: white;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
 
 }
 .one-point-button{
     background-color: white;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
 
+}
+
+.yellow-card{
+    border: 2px solid black;
+}
+.red-card{
+    border: 2px solid black;
 }

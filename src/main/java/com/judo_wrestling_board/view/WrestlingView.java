@@ -5,6 +5,7 @@ import com.judo_wrestling_board.service.AthleteService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -104,7 +105,6 @@ public class WrestlingView extends Div {
         fourPointsTwo.addClickListener(e -> addScore(fourPointsTwo, playerTwoHorizontal, scoreTwo));
 
 
-
         Button goBackToHome = new Button("Back to Home");
         goBackToHome.setClassName("back-button");
         goBackToHome.addClickListener(e -> {
@@ -121,13 +121,6 @@ public class WrestlingView extends Div {
         playerOneHorizontal.add(athleteOneChoose,score,ammonition, fourPoints, twoPoints, onePoint);
         playerTwoHorizontal.add(athleteTwoChoose,scoreTwo,ammonitionTwo, fourPointsTwo, twoPointsTwo, onePointTwo);
         add(playerOneHorizontal,playerTwoHorizontal,goBackToHome, refreshButton);
-
-
-
-
-
-
-
 
 
     }
@@ -149,32 +142,31 @@ public class WrestlingView extends Div {
 
     }
 
-    private void addAmmonition(Button ammonition, HorizontalLayout playerOneHorizontal) {
-
+    private void addAmmonition(Button button, HorizontalLayout playerHorizontal) {
         counter++;
-        Icon ammonitionIcon = createIcon(VaadinIcon.WARNING);
-        ammonitionIcon.setClassName("ammonition-icon");
-        ammonitionIcon.getElement().setAttribute("theme", "badge error");
-        ammonitionIcon.setSize("3em");
+
+        Image yellowCard = new Image();
+        yellowCard.setSrc("img/yellow-card.jpg");
+        yellowCard.setWidth("30px");
+        yellowCard.setHeight("40px");
+        yellowCard.setClassName("yellow-card");
 
         Div newAmmoDisplay = new Div();
-        newAmmoDisplay.getElement().setAttribute("theme", "badge error");
         newAmmoDisplay.setClassName("ammo-display");
-        newAmmoDisplay.add(ammonitionIcon);
 
-
-        if(counter >2) {
-
-            Div expulsion = new Div();
-            expulsion.setText("Expulsion");
-            expulsion.getElement().setAttribute("theme", "badge error");
-            expulsion.setClassName("expulsion");
-            playerOneHorizontal.add(expulsion);
-
+        if (counter <= 2) {
+            newAmmoDisplay.add(yellowCard);
+            playerHorizontal.add(newAmmoDisplay);
+        } else if (counter == 3) {
+            Image redCard = new Image();
+            redCard.setSrc("img/red-card.jpg");
+            redCard.setWidth("30px");
+            redCard.setHeight("40px");
+            redCard.setClassName("red-card");
+            newAmmoDisplay.add(redCard);
+            playerHorizontal.add(newAmmoDisplay);
             counter = 0;
         }
-
-        playerOneHorizontal.add(newAmmoDisplay);
     }
 
 
