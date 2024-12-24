@@ -289,6 +289,23 @@
     color: white;
     font-size: 20px;
 }
+
+.wrestler-one-choose{
+padding: 10px 20px;
+font-size: 30px;
+border-radius: 10px;
+display: inline-block;
+}
+
+.wrestler-two-choose{
+    padding: 10px 20px;
+    font-size: 30px;
+    border-radius: 10px;
+    display: inline-block;
+
+}
+
+
 .wrestler-one-choose::part(label){
     color: white;
     font-size: 20px;
@@ -310,4 +327,28 @@
 .wrestler-two-choose vaadin-select-value-button > vaadin-select-item{
     color: white;
 }
+.ammonition-button{
+    color: red;
+    background-color: yellow;
+    cursor: pointer;
+    font-size: 20px;
+}
+.four-points-button{
+    background-color: white;
+    cursor: pointer;
+    font-size: 20px;
 
+
+}
+.two-points-button{
+    background-color: white;
+    cursor: pointer;
+    font-size: 20px;
+
+}
+.one-point-button{
+    background-color: white;
+    cursor: pointer;
+    font-size: 20px;
+
+}

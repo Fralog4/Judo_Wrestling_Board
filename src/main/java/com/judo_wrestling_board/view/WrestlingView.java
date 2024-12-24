@@ -75,6 +75,10 @@ public class WrestlingView extends Div {
         ammonition.setClassName("ammonition-button");
         ammonition.addClickListener(e -> addAmmonition(ammonition, playerOneHorizontal));
 
+        Button ammonitionTwo = new Button("Ammonition");
+        ammonitionTwo.setClassName("ammonition-button");
+        ammonitionTwo.addClickListener(e -> addAmmonition(ammonitionTwo, playerTwoHorizontal));
+
         Button fourPoints = new Button("4 Points");
         fourPoints.setClassName("four-points-button");
         fourPoints.addClickListener(e -> addScore(fourPoints, playerOneHorizontal, score));
@@ -115,7 +119,7 @@ public class WrestlingView extends Div {
 
 
         playerOneHorizontal.add(athleteOneChoose,score,ammonition, fourPoints, twoPoints, onePoint);
-        playerTwoHorizontal.add(athleteTwoChoose,scoreTwo,ammonition, fourPointsTwo, twoPointsTwo, onePointTwo);
+        playerTwoHorizontal.add(athleteTwoChoose,scoreTwo,ammonitionTwo, fourPointsTwo, twoPointsTwo, onePointTwo);
         add(playerOneHorizontal,playerTwoHorizontal,goBackToHome, refreshButton);
 
 
