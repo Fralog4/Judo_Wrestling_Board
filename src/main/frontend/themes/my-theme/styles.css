@@ -115,12 +115,6 @@
     background-size: cover;
     height: 100vh;
 }
-.wrestling-view{
-    background-image: url("img/wrestling.jpg");
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-}
 .ipponButton-button{
     color:white;
     cursor: pointer;
@@ -237,5 +231,81 @@
     cursor: pointer;
     margin: 5px;
 }
+.wrestling-view{
+    background-image: url("img/wrestling.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
 
+.player-one-horizontal{
+    background-color: red;
+    height: 40vh;
+    opacity:0.5;
+}
+.player-two-horizontal{
+    background-color: blue;
+    height: 40vh;
+    opacity:0.5;
+}
+.score-wrestler{
+    color:white;
+    font-size: 30px;
+    display: inline-block;
+}
+
+.score-wrestler::part(input-field){
+    color: white;
+}
+.score-wrestler::part(increase-button){
+    color: white;
+}
+.score-wrestler::part(decrease-button){
+    color: white;
+}
+
+.score-wrestler::part(label){
+    color: white;
+    font-size: 20px;
+}
+.score-wrestler-two{
+    color:white;
+    font-size: 30px;
+    display: inline-block;
+}
+
+.score-wrestler-two::part(input-field){
+    color: white;
+}
+.score-wrestler-two::part(increase-button){
+    color: white;
+}
+.score-wrestler-two::part(decrease-button){
+    color: white;
+}
+.score-wrestler-two::part(label){
+    color: white;
+    font-size: 20px;
+}
+.wrestler-one-choose::part(label){
+    color: white;
+    font-size: 20px;
+}
+.wrestler-one-choose::part(input-field){
+    background-color: hsl(241 48% 58% / 1);
+
+}
+.wrestler-one-choose vaadin-select-value-button > vaadin-select-item{
+    color: white;
+}
+.wrestler-two-choose::part(label){
+    color: white;
+    font-size: 20px;
+}
+.wrestler-two-choose::part(input-field){
+    background-color: hsl(241 48% 58% / 1);
+}
+.wrestler-two-choose vaadin-select-value-button > vaadin-select-item{
+    color: white;
+}
 
