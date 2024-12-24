@@ -240,12 +240,12 @@
 
 .player-one-horizontal{
     background-color: red;
-    height: 45vh;
+    height: 40vh;
     opacity:0.5;
 }
 .player-two-horizontal{
     background-color: blue;
-    height: 45vh;
+    height: 40vh;
     opacity:0.5;
 }
 .score-wrestler{

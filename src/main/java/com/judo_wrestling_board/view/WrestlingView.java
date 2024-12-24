@@ -45,7 +45,6 @@ public class WrestlingView extends Div {
         score.setLabel("Punteggio");
         score.setClassName("score-wrestler");
         score.setMin(0);
-        score.setMax(2);
         score.setStepButtonsVisible(true);
         score.setValue(0);
 
@@ -54,7 +53,6 @@ public class WrestlingView extends Div {
         scoreTwo.setLabel("Punteggio");
         scoreTwo.setClassName("score-wrestler-two");
         scoreTwo.setMin(0);
-        scoreTwo.setMax(2);
         scoreTwo.setStepButtonsVisible(true);
         scoreTwo.setValue(0);
 
