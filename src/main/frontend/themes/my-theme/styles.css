@@ -232,7 +232,7 @@
     margin: 5px;
 }
 .wrestling-view{
-    background-image: url("img/wrestling.jpg");
+    background-image: url("img/wrestlingmat.jpg");
     background-position: center;
     background-size: cover;
     height: 100vh;
@@ -277,9 +277,11 @@
 .score-wrestler-two::part(input-field){
     color: white;
 }
+
 .score-wrestler-two::part(increase-button){
     color: white;
 }
+
 .score-wrestler-two::part(decrease-button){
     color: white;
 }

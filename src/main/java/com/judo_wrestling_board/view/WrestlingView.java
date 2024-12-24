@@ -114,8 +114,8 @@ public class WrestlingView extends Div {
         });
 
 
-        playerOneHorizontal.add(athleteOneChoose, ammonition, fourPoints, twoPoints, onePoint, score);
-        playerTwoHorizontal.add(athleteTwoChoose, ammonition, fourPointsTwo, twoPointsTwo, onePointTwo, scoreTwo);
+        playerOneHorizontal.add(athleteOneChoose,score,ammonition, fourPoints, twoPoints, onePoint);
+        playerTwoHorizontal.add(athleteTwoChoose,scoreTwo,ammonition, fourPointsTwo, twoPointsTwo, onePointTwo);
         add(playerOneHorizontal,playerTwoHorizontal,goBackToHome, refreshButton);
 
 
