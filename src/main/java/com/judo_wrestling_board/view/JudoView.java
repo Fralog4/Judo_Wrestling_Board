@@ -139,7 +139,6 @@ public class JudoView extends Div {
             redCard.setClassName("red-card");
             newAmmoDisplay.add(redCard);
 
-            // Add Hansoku-make text
             Span hansokuText = new Span("HANSOKU-MAKE");
             hansokuText.getElement().setAttribute("theme", "badge error");
             newAmmoDisplay.add(hansokuText);
@@ -156,8 +155,15 @@ public class JudoView extends Div {
 
     private void getHansokuFromButton(Button button, HorizontalLayout playerHorizontal) {
         Div ammoDisplay = new Div();
-        ammoDisplay.setText(JudoAmmonitions.HANSOKU_MAKE.toString());
-        ammoDisplay.getElement().setAttribute("theme", "badge error");
+        Image redCard = new Image();
+        redCard.setSrc("img/red-card.jpg");
+        redCard.setWidth("30px");
+        redCard.setHeight("40px");
+        redCard.setClassName("red-card");
+        ammoDisplay.add(redCard);
+        Span hansokuText = new Span("HANSOKU-MAKE");
+        hansokuText.getElement().setAttribute("theme", "badge error");
+        ammoDisplay.add(hansokuText);
         playerHorizontal.add(ammoDisplay);
     }
 
