@@ -106,7 +106,7 @@ function injectManifestToSWPlugin(): rollup.Plugin {
         const { manifestEntries } = await getManifest({
           globDirectory: buildOutputFolder,
           globPatterns: ['**/*'],
-          globIgnores: ['**/*.br'],
+          globIgnores: ['**/*.br', 'pwa-icons/**'],
           manifestTransforms: [rewriteManifestIndexHtmlUrl],
           maximumFileSizeToCacheInBytes: 100 * 1024 * 1024 // 100mb,
         });
@@ -298,7 +298,7 @@ function statsExtracterPlugin(): PluginOption {
 
       const frontendFiles: Record<string, string> = {};
 
-      const projectFileExtensions = ['.js', '.js.map', '.ts', '.ts.map', '.tsx', '.tsx.map', '.css', '.css.map'];
+      const projectFileExtensions = ['.js', '.js.map', '.ts', '.ts.map', '.tsx', '.tsx.map', '.css', '.css.map', '.'];
 
       const isThemeComponentsResource = (id: string) =>
           id.startsWith(themeOptions.frontendGeneratedFolder.replace(/\\/g, '/'))

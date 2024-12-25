@@ -360,3 +360,28 @@ display: inline-block;
 .red-card{
     border: 2px solid black;
 }
+
+.timer-div{
+
+    background-color: orange;
+    border-radius: 10px;
+    max-width: 60vh;
+    margin: auto;
+}
+
+.start-button{
+    color: green;
+    cursor: pointer;
+}
+.stop-button{
+    color: red;
+    cursor: pointer;
+}
+.reset-button{
+    color: black;
+    cursor: pointer;
+}
+.timer{
+    color: black;
+    font-size: 30px;
+}

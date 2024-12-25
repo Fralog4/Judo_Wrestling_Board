@@ -1,5 +1,6 @@
 package com.judo_wrestling_board.view;
 
+import com.flowingcode.vaadin.addons.simpletimer.SimpleTimer;
 import com.judo_wrestling_board.model.JudoAmmonitions;
 import com.judo_wrestling_board.model.JudoScore;
 import com.judo_wrestling_board.service.AthleteService;
@@ -19,9 +20,29 @@ public class JudoView extends Div {
     private int shidoCounterOne = 0;
     private int shidoCounterTwo = 0;
 
+    private SimpleTimer timer = new SimpleTimer();
+
     public JudoView(AthleteService athleteService) {
         this.athleteService = athleteService;
         addClassName("judo-view");
+
+        timer.setClassName("timer");
+        timer.setMinutes(true);
+        timer.setStartTime(300);
+
+        Div timerDiv = new Div();
+        Button startButton = new Button("Start");
+        startButton.addClickListener(event -> timer.start());
+        startButton.addClassName("start-button");
+        Button stopButton = new Button("Stop");
+        stopButton.addClickListener(event -> timer.pause());
+        stopButton.addClassName("stop-button");
+        Button resetButton = new Button("Reset");
+        resetButton.addClickListener(event -> timer.reset());
+        resetButton.addClassName("reset-button");
+        timerDiv.setClassName("timer-div");
+        timerDiv.add(startButton, stopButton, resetButton);
+        timerDiv.add(timer);
 
         HorizontalLayout athleteOne = new HorizontalLayout();
         athleteOne.setSpacing(true);
@@ -111,7 +132,7 @@ public class JudoView extends Div {
 
         athleteOne.add(athleteOneChoose, score, ipponButton, wazaAriButton, yukoButton, shidoButton, hansokuMakeButton);
         athleteTwo.add(athleteTwoChoose, scoreTwo, ipponButtonTwo, wazaAriButtonTwo, yukoButtonTwo, shidoButtonTwo, hansokuMakeButtonTwo);
-        add(athleteOne, athleteTwo, goBackToHome, refreshButton);
+        add(athleteOne, athleteTwo, goBackToHome, refreshButton,timerDiv);
     }
 
     private void addAmmonition(Button button, HorizontalLayout playerHorizontal) {
