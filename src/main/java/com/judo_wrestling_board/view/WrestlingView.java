@@ -139,7 +139,7 @@ public class WrestlingView extends Div {
 
         playerOneHorizontal.add(athleteOneChoose,score,ammonition, fourPoints, twoPoints, onePoint);
         playerTwoHorizontal.add(athleteTwoChoose,scoreTwo,ammonitionTwo, fourPointsTwo, twoPointsTwo, onePointTwo);
-        add(playerOneHorizontal,playerTwoHorizontal,goBackToHome, refreshButton);
+        add(playerOneHorizontal,playerTwoHorizontal,goBackToHome, refreshButton,timerDiv);
 
 
     }
