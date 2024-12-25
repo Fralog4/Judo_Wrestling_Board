@@ -367,6 +367,7 @@ display: inline-block;
     border-radius: 10px;
     max-width: 60vh;
     margin: auto;
+    opacity: 0.8;
 }
 
 .start-button{
