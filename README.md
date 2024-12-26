@@ -12,8 +12,19 @@
 * Scoring system, including monition system and a timer set to 5 minutes
 
 ## Technologies Used
-* List the programming languages, frameworks, and libraries used in the project
-* Java Spring BOot for the backend
+* Java Spring Boot for the backend
 * H2 as Database
 * Vaadin for the frontend
 * Countdown timer from a custom Vaadin component
+
+## HOME PAGE
+![img_2.png](img_2.png)
+
+## REGISTRATION PAGE
+![img.png](img.png)
+
+## JUDO BOARD
+![img_1.png](img_1.png)
+
+## WRESTLING BOARD
+![img_3.png](img_3.png)

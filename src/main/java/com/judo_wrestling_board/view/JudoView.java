@@ -210,6 +210,7 @@ public class JudoView extends Div {
                     scoreLayout.setValue(scoreLayout.getValue() + 1);
                     return JudoScore.WAZARI;
                 } else if (scoreLayout.getValue() == 3) {
+                    scoreLayout.setValue(10);
                     return JudoScore.IPPON;
                 } else {
                     return JudoScore.NOPOINT;       //little bug if you press Yuko for 4 times then  you'll get a NOPOINT
