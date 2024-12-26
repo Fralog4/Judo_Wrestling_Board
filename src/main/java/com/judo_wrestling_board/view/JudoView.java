@@ -212,7 +212,9 @@ public class JudoView extends Div {
                 } else if (scoreLayout.getValue() == 3) {
                     return JudoScore.IPPON;
                 } else {
-                    return JudoScore.NOPOINT;
+                    return JudoScore.NOPOINT;       //little bug if you press Yuko for 4 times then  you'll get a NOPOINT
+                                                     // if you try to put a Wazari, this due to the poor check on the score value
+                                                    //same happen if you press Yuko 3 times you'll get an Ippon if you press Waza-Ari
                 }
             case "Yuko":
                 if (scoreLayout.getValue() < 10) {

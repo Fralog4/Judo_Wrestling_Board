@@ -29,7 +29,9 @@ public class RegisterView extends VerticalLayout {
         FormLayout form = new FormLayout();
 
         TextField nameField = new TextField("Nome");
+        nameField.setClassName("name-field");
         TextField lastNameField = new TextField("Cognome");
+        lastNameField.setClassName("last-name-field");
         Select weightClassSelect = new Select<>();
         weightClassSelect.setLabel("Classe di peso");
         weightClassSelect.setPlaceholder("Seleziona la classe di peso");
@@ -40,11 +42,13 @@ public class RegisterView extends VerticalLayout {
                 "CLASS_80KG",
                 "CLASS_90KG",
                 "CLASS_100KG");
+        weightClassSelect.setClassName("weight-class-select");
 
         Select sportSelect = new Select<>();
         sportSelect.setLabel("Sport");
         sportSelect.setPlaceholder("Seleziona lo sport");
         sportSelect.setItems("Judo", "Wrestling");
+        sportSelect.setClassName("sport-select");
 
         form.add(nameField, lastNameField, weightClassSelect, sportSelect);
 
